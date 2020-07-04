@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 
-class HeroAnimationPage extends StatelessWidget {
+class PhotoHero extends StatelessWidget {
   final String photo;
   final VoidCallback onTab;
   final double width;
 
-  const HeroAnimationPage({Key key, this.photo, this.onTab, this.width})
+  const PhotoHero({Key key, this.photo, this.onTab, this.width})
       : super(key: key);
 
   @override
@@ -39,7 +39,7 @@ class HeroAnimation extends StatelessWidget {
         title: const Text("Basic Hero animation"),
       ),
       body: Center(
-        child: HeroAnimationPage(
+        child: PhotoHero(
           photo: "http://www.devio.org/img/avatar.png",
           width: 300.0,
           onTab: () {
@@ -52,7 +52,7 @@ class HeroAnimation extends StatelessWidget {
                   color: Colors.lightBlue,
                   padding: EdgeInsets.all(16),
                   alignment: Alignment.topLeft,
-                  child: HeroAnimationPage(
+                  child: PhotoHero(
                     photo: "http://www.devio.org/img/avatar.png",
                     width: 100.0,
                     onTab: () {

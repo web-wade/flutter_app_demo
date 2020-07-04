@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/shared.dart';
 
 import 'add_lifecycle.dart';
 import 'animation.dart';
@@ -6,6 +7,8 @@ import 'fluterLayout.dart';
 import 'flutter_widget_lifeCycle.dart';
 import 'gesture_page.dart';
 import 'hero_animation.dart';
+import 'http.dart';
+import 'http_async.dart';
 import 'launch_Page.dart';
 import 'less_group_page.dart';
 import 'photo_app_page.dart';
@@ -23,6 +26,7 @@ class DynamciTheme extends StatefulWidget {
 
 class _DynamciThemeState extends State<DynamciTheme> {
   Brightness brightness = Brightness.light;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -73,7 +77,10 @@ class _DynamciThemeState extends State<DynamciTheme> {
         'app': (BuildContext context) => AppLifecycle(),
         'photo': (BuildContext context) => PhotoAppPage(),
         'animation': (BuildContext context) => AnimationPage(),
-        'hero': (BuildContext context) => HeroAnimationPage(),
+        'hero': (BuildContext context) => HeroAnimation(),
+        'http': (BuildContext context) => HttpPage(),
+        'httpAsync': (BuildContext context) => HttpAsync(),
+        'Sharedpage': (BuildContext context) => Sharedpage(),
       },
     );
   }
@@ -86,6 +93,7 @@ class RouterNavigator extends StatefulWidget {
 
 class _RouterNavigatorState extends State<RouterNavigator> {
   bool byName = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -109,7 +117,10 @@ class _RouterNavigatorState extends State<RouterNavigator> {
           _item('AppLifecycle', AppLifecycle(), 'app'),
           _item('PhotoAppPage', PhotoAppPage(), 'photo'),
           _item('AnimationPage', AnimationPage(), 'animation'),
-          _item('HeroAnimationPage', HeroAnimationPage(), 'hero'),
+          _item('HeroAnimation', HeroAnimation(), 'hero'),
+          _item('HttpPage', HttpPage(), 'http'),
+          _item('HttpAsync', HttpAsync(), 'httpAsync'),
+          _item('Sharedpage', Sharedpage(), 'Sharedpage'),
         ],
       ),
     );
