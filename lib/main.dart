@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/shared.dart';
+import 'package:flutter_app/xiala.dart';
 
 import 'add_lifecycle.dart';
 import 'animation.dart';
@@ -11,13 +12,12 @@ import 'http.dart';
 import 'http_async.dart';
 import 'launch_Page.dart';
 import 'less_group_page.dart';
+import 'listViewPage.dart';
 import 'photo_app_page.dart';
 import 'res_page.dart';
 import 'statefull_page.dart';
 
-void main() {
-  runApp(MaterialApp(home: DynamciTheme()));
-}
+void main() => runApp(DynamciTheme());
 
 class DynamciTheme extends StatefulWidget {
   @override
@@ -36,36 +36,7 @@ class _DynamciThemeState extends State<DynamciTheme> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            '创建路由',
-          ),
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back),
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  if (brightness == Brightness.dark) {
-                    brightness = Brightness.light;
-                  } else {
-                    brightness = Brightness.dark;
-                  }
-                });
-              },
-              child: Text("切换主题"),
-            ),
-            RouterNavigator()
-          ],
-        ),
-      ),
+      home: Home(),
       routes: <String, WidgetBuilder>{
         'less': (BuildContext context) => LessGroupPage(),
         'layout': (BuildContext context) => FlutterLayoutPage(),
@@ -81,32 +52,35 @@ class _DynamciThemeState extends State<DynamciTheme> {
         'http': (BuildContext context) => HttpPage(),
         'httpAsync': (BuildContext context) => HttpAsync(),
         'Sharedpage': (BuildContext context) => Sharedpage(),
+        'ListViewPage': (BuildContext context) => ListViewPage(),
+        'XialaPage': (BuildContext context) => XialaPage(),
       },
     );
   }
 }
 
-class RouterNavigator extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _RouterNavigatorState createState() => _RouterNavigatorState();
+  _HomeState createState() => _HomeState();
 }
 
-class _RouterNavigatorState extends State<RouterNavigator> {
-  bool byName = false;
-
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '创建路由',
+        ),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back),
+        ),
+      ),
+      body: ListView(
         children: <Widget>[
-          SwitchListTile(
-              title: Text('${byName ? "" : "不"}'),
-              value: byName,
-              onChanged: (value) {
-                setState(() {
-                  byName = value;
-                });
-              }),
           _item('StatelessWidget与基础组件', LessGroupPage(), 'less'),
           _item('FlutterLayoutPage与基础组件', FlutterLayoutPage(), 'layout'),
           _item('StateFullPage与基础组件', StateFullPage(), 'full'),
@@ -119,8 +93,10 @@ class _RouterNavigatorState extends State<RouterNavigator> {
           _item('AnimationPage', AnimationPage(), 'animation'),
           _item('HeroAnimation', HeroAnimation(), 'hero'),
           _item('HttpPage', HttpPage(), 'http'),
-          _item('HttpAsync', HttpAsync(), 'httpAsync'),
+          _item('HttpAsync', HttpAsync(), 'httpAsy nc'),
           _item('Sharedpage', Sharedpage(), 'Sharedpage'),
+          _item('ListViewPage', ListViewPage(), 'ListViewPage'),
+          _item('XialaPage', XialaPage(), 'XialaPage'),
         ],
       ),
     );
@@ -130,15 +106,71 @@ class _RouterNavigatorState extends State<RouterNavigator> {
     return Container(
       child: RaisedButton(
         onPressed: () {
-          if (byName) {
-            Navigator.pushNamed(context, routeName);
-          } else {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => page));
-          }
+          Navigator.pushNamed(context, routeName);
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => page));
         },
         child: Text(title),
       ),
     );
   }
 }
+
+// class RouterNavigator extends StatefulWidget {
+//   @override
+//   _RouterNavigatorState createState() => _RouterNavigatorState();
+// }
+
+// class _RouterNavigatorState extends State<RouterNavigator> {
+//   bool byName = false;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: ListView(
+//         children: <Widget>[
+//           SwitchListTile(
+//               title: Text('${byName ? "" : "不"}'),
+//               value: byName,
+//               onChanged: (value) {
+//                 setState(() {
+//                   byName = value;
+//                 });
+//               }),
+//          _item('StatelessWidget与基础组件', LessGroupPage(), 'less'),
+//          _item('FlutterLayoutPage与基础组件', FlutterLayoutPage(), 'layout'),
+//          _item('StateFullPage与基础组件', StateFullPage(), 'full'),
+//          _item('GesturePage', GesturePage(), 'gesture'),
+//          _item('ResPage', ResPage(), 'image'),
+//           _item('LaunchPage打开第三方应用', LaunchPage(), 'launch'),
+//           _item('WidgetLifecycle', WidgetLifecycle(), 'lifecycle'),
+//           _item('AppLifecycle', AppLifecycle(), 'app'),
+//           _item('PhotoAppPage', PhotoAppPage(), 'photo'),
+//           _item('AnimationPage', AnimationPage(), 'animation'),
+//           _item('HeroAnimation', HeroAnimation(), 'hero'),
+//           _item('HttpPage', HttpPage(), 'http'),
+//           _item('HttpAsync', HttpAsync(), 'httpAsy nc'),
+//           _item('Sharedpage', Sharedpage(), 'Sharedpage'),
+//           _item('ListViewPage', ListViewPage(), 'ListViewPage'),
+//           _item('XialaPage', XialaPage(), 'XialaPage'),
+//         ],
+//       ),
+//     );
+//   }
+
+//   _item(String title, page, String routeName) {
+//     return Container(
+//       child: RaisedButton(
+//         onPressed: () {
+//           if (byName) {
+//             Navigator.pushNamed(context, routeName);
+//           } else {
+//             Navigator.push(
+//                 context, MaterialPageRoute(builder: (context) => page));
+//           }
+//         },
+//         child: Text(title),
+//       ),
+//     );
+//   }
+// }

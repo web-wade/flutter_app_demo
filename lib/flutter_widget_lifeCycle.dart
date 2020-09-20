@@ -5,11 +5,44 @@ class WidgetLifecycle extends StatefulWidget {
   _WidgetLifecycleState createState() => _WidgetLifecycleState();
 }
 
+class Student extends Person {
+  String _school;
+  String city;
+  String country;
+  String name;
+
+  Student(this._school, String name, int age,
+      {this.city, this.country = "china"})
+      : name = '$country.$city',
+        super(name, age) {
+    print("我也不知道能干啥");
+  }
+
+  @override
+  String toString() {
+    return 'name:$name,age:$age,city:$city,country:$country';
+  }
+
+  String get country1 => country;
+}
+
+class Person {
+  String name;
+  int age;
+  Person(this.name, this.age);
+  @override
+  String toString() {
+    return 'name:$name,age:$age';
+  }
+}
+
 class _WidgetLifecycleState extends State<WidgetLifecycle> {
   int _count = 0;
   @override
   void initState() {
     print('-----initState-------');
+    var student = Student("交通", 'wade', 19, city: '大连');
+    print(student.toString());
     super.initState();
   }
 

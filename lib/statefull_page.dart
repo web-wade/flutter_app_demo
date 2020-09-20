@@ -7,9 +7,10 @@ class StateFullPage extends StatefulWidget {
 
 class _StateFullPageState extends State<StateFullPage> {
   int _currentIndex = 0;
+  TextStyle textStyle = TextStyle(fontSize: 20);
+
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(fontSize: 20);
     return MaterialApp(
         title: 'StatefullWidget与基础组件',
         theme: ThemeData(
